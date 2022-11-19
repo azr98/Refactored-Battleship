@@ -137,8 +137,10 @@ $("#numberOfShipsButton").click(function(){
 $("#fireButton").click(function(){
       var fireGuess = $("#guessInput").val();
       controller.processGuess(fireGuess)
-      fireGuess = ''
+      $("#guessInput").val('')
     });
+
+    
 
 var view = {
     displayMessage : function(msg){
