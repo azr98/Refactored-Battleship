@@ -37,7 +37,7 @@ var controller = {
             }
             
         }
-        //guess is not on the board
+        //guess is not on the board or miss
          else {
             view.displayMessage("Oops either the letter or number of your guess is too high")
             return false
@@ -81,12 +81,14 @@ var model = {
     boardSize : 7,
     fire : function(guess){
         for (var ship of this.ships){
-
-            if(this.isSunk(ship)){
-                view.displayMessage("Ship is already been sunk try another guess")
-                return false
-            }   
             
+            //check if there is already a hit there
+            if (ship.hits.includes(guess)){
+                view.displayMessage("You already hit there")
+                return false
+            }
+
+            //normal hit 
             else if (ship.locations.includes(guess)){
                 ship.hits.push(location)
                 view.displayMessage("HIT!")
@@ -94,6 +96,7 @@ var model = {
                 return true
             }
             
+            //miss
             else {
                 view.displayMessage("MISS!")
                 view.displayMiss(guess)
